@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 16.0,
           ),
           FutureBuilder(
-            future: CallAPI().getAlbums('1'),
+            future: CallAPI().getAlbums('album1.json'),
             builder: (BuildContext context,
               AsyncSnapshot<List<AlbumsModel>?> snapshot) {
               if (snapshot.hasError) {
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 16.0,
           ),
           FutureBuilder(
-            future: CallAPI().getAlbums('2'),
+            future: CallAPI().getAlbums('album2.json'),
             builder: (BuildContext context,
               AsyncSnapshot<List<AlbumsModel>?> snapshot) {
               if (snapshot.hasError) {
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 16.0,
           ),
           FutureBuilder(
-            future: CallAPI().getAlbums('3'),
+            future: CallAPI().getAlbums('album3.json'),
             builder: (BuildContext context,
               AsyncSnapshot<List<AlbumsModel>?> snapshot) {
               if (snapshot.hasError) {
@@ -123,7 +123,10 @@ class _HomeScreenState extends State<HomeScreen> {
           
           return Container(
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                // กดลิงก์บนอัลบั้มแล้วไปเปิดหน้า player_screen
+                Navigator.pushNamed(context, '/player');
+              },
               child: Padding(
                 padding: const EdgeInsets.only(left: 12.0, right: 12.0),
                 child: Column(

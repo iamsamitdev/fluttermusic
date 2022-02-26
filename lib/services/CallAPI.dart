@@ -10,12 +10,12 @@ class CallAPI {
   };
 
   // กำหนด URL ของ API
-  static const String baseAPIURL = "http://192.168.1.49/musicapi/public/api/";
+  static const String baseAPIURL = "https://www.itgenius.co.th/sandbox_api/fluttermusicapi/";
   
    // Read Albums ทั้งหมด
-  Future<List<AlbumsModel>?> getAlbums(typeid) async {
+  Future<List<AlbumsModel>?> getAlbums(album) async {
     final response = await http.get(
-      Uri.parse(baseAPIURL+'albums/'+typeid),
+      Uri.parse(baseAPIURL+album),
       headers: _setHeaders()
     );
     // ignore: unnecessary_null_comparison
