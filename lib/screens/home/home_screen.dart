@@ -17,10 +17,31 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 12.0, left: 12.0),
-            child: Text(
-              'อัลบั้มแนะนำ',
-              style: TextStyle(fontSize: 22.0),
+            padding: EdgeInsets.only(top: 12.0, left: 12.0, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'อัลบั้มแนะนำ',
+                  style: TextStyle(fontSize: 22.0),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/allsong');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(20.0),
+                    ),
+                    primary: Colors.greenAccent,
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  ),
+                  child: Text('เพลงทั้งหมด',
+                    style: TextStyle(
+                    fontSize: 14.0,
+                  )),
+                )
+              ],
             ),
           ),
           SizedBox(
@@ -125,7 +146,16 @@ class _HomeScreenState extends State<HomeScreen> {
             child: InkWell(
               onTap: () {
                 // กดลิงก์บนอัลบั้มแล้วไปเปิดหน้า player_screen
-                Navigator.pushNamed(context, '/player');
+                Navigator.pushNamed(
+                  context, 
+                  '/player',
+                  arguments: {
+                    'coverurl': albumsModel.coverurl,
+                    'albumname': albumsModel.albumname,
+                    'singername': albumsModel.singername,
+                    'songurl': albumsModel.songurl
+                  }
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 12.0, right: 12.0),
@@ -147,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 12.0,
                     ),
                     Text(
-                      albumsModel.albumname,
+                      albumsModel.albumname.length >= 10 ? albumsModel.albumname.substring(0,10)+"...": albumsModel.albumname,
                       style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),
                     ),
                     Text(

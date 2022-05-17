@@ -1,7 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+
+  // สร้าง Object SharedPreferences 
+  late SharedPreferences sharedPreferences;
+
+  // สร้างตัวแปรไว้เก็บข้อมูล Profile
+  String displayName='', pictureUrl='', statusMessage='', userId='';
+
+  // สร้างฟังก์ชันอ่านข้อมูล Profile
+  getProfile() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      displayName = sharedPreferences.getString('displayName')!;
+      pictureUrl = sharedPreferences.getString('pictureUrl')!;
+      statusMessage = sharedPreferences.getString('statusMessage')!;
+      userId = sharedPreferences.getString('userId')!;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,17 +41,21 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(
             height: 20.0,
           ),
+          pictureUrl != '' ?
           CircleAvatar(
             radius: 70,
-            backgroundImage: NetworkImage(
-                "https://miro.medium.com/fit/c/1360/1360/2*uIHWWxBRQYGZrSdQ9WqPVA.png"),
-          ),
+            backgroundImage: NetworkImage('$pictureUrl'),
+          ): CircularProgressIndicator(),
           SizedBox(
             height: 20.0,
           ),
           Text(
-            "สามิตร โกยม",
-            style: TextStyle(color: Colors.white, fontSize: 32.0),
+            '$displayName',
+            style: TextStyle(color: Colors.white, fontSize: 24.0),
+          ),
+          Text(
+            '$statusMessage',
+            style: TextStyle(color: Colors.white, fontSize: 16.0),
           ),
           SizedBox(
             height: 30.0,
@@ -35,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "501",
-                      style: TextStyle(color: Colors.white, fontSize: 30.0),
+                      style: TextStyle(color: Colors.white, fontSize: 24.0),
                     ),
                     SizedBox(
                       height: 5.0,
@@ -55,7 +87,7 @@ class ProfileScreen extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "20.1K",
-                      style: TextStyle(color: Colors.white, fontSize: 30.0),
+                      style: TextStyle(color: Colors.white, fontSize: 24.0),
                     ),
                     SizedBox(
                       height: 5.0,
@@ -75,7 +107,7 @@ class ProfileScreen extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       "1.2k",
-                      style: TextStyle(color: Colors.white, fontSize: 30.0),
+                      style: TextStyle(color: Colors.white, fontSize: 24.0),
                     ),
                     SizedBox(
                       height: 5.0,
@@ -106,7 +138,30 @@ class ProfileScreen extends StatelessWidget {
               ),
               child: Text('แก้ไขโปรไฟล์',
                   style: TextStyle(
-                    fontSize: 18.0,
+                    fontSize: 16.0,
+                  )),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(12.0),
+            child: ElevatedButton(
+              onPressed: () async {
+                // เขียนคำสั่งล้างค่าออกจาก SharedPreferences
+                sharedPreferences = await SharedPreferences.getInstance();
+                sharedPreferences.clear();
+                // ส่งกลับไปหน้า Login
+                Navigator.pushNamed(context, '/login');
+              },
+              style: ElevatedButton.styleFrom(
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0),
+                ),
+                primary: Colors.redAccent,
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 0),
+              ),
+              child: Text('ออกจากระบบ',
+                  style: TextStyle(
+                    fontSize: 16.0,
                   )),
             ),
           )

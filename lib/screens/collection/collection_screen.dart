@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CollectionScreen extends StatelessWidget {
   // const CollectionScreen({Key? key}) : super(key: key);
 

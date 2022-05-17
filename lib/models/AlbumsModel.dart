@@ -10,6 +10,7 @@ class AlbumsModel {
         required this.id,
         required this.coverurl,
         required this.albumname,
+        required this.songurl,
         required this.singername,
         required this.albumtype,
         required this.createdAt,
@@ -20,6 +21,7 @@ class AlbumsModel {
     String id;
     String coverurl;
     String albumname;
+    String songurl;
     String singername;
     String albumtype;
     DateTime? createdAt;
@@ -30,6 +32,7 @@ class AlbumsModel {
         id: json["id"] == null ? null : json["id"],
         coverurl: json["coverurl"] == null ? null : json["coverurl"],
         albumname: json["albumname"] == null ? null : json["albumname"],
+        songurl: json["songurl"] == null ? null : json["songurl"],
         singername: json["singername"] == null ? null : json["singername"],
         albumtype: json["albumtype"] == null ? null : json["albumtype"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
@@ -41,6 +44,7 @@ class AlbumsModel {
         "id": id == null ? null : id,
         "coverurl": coverurl == null ? null : coverurl,
         "albumname": albumname == null ? null : albumname,
+        "songurl": songurl == null ? null : songurl,
         "singername": singername == null ? null : singername,
         "albumtype": albumtype == null ? null : albumtype,
         "created_at": createdAt == null ? null : createdAt!.toIso8601String(),

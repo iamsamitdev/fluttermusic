@@ -1,5 +1,6 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttermusic/screens/allsong/allsong_screen.dart';
+import 'package:fluttermusic/screens/login/login_screen.dart';
 import 'package:fluttermusic/screens/mainpage/mainpage_screen.dart';
 import 'package:fluttermusic/screens/player/player_screen.dart';
 
@@ -7,4 +8,6 @@ import 'package:fluttermusic/screens/player/player_screen.dart';
 Map<String, WidgetBuilder> routes = {
   "/mainpage":(BuildContext context) => MainPageScreen(),
   "/player":(BuildContext context) => PlayerScreen(),
+  "/login":(BuildContext context) => LoginScreen(),
+  "/allsong":(BuildContext context) => AllSongScreen(),
 };
